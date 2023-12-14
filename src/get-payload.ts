@@ -37,7 +37,7 @@ export const getPayLoadCLient = async ({ initOptions }: Args = {}) => {
   try {
     cached.client = await cached.promise;
   } catch (e: unknown) {
-    cached.pr9omise = null;
+    cached.promise = null;
     throw e;
   }
 
