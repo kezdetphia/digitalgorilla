@@ -7,10 +7,10 @@ import { trpc } from "@/trpc/client";
 
 
 //allows us to use trpc around the whole front-end
-export default function Providers({children}: PropsWithChildren) {
+export default function Providers({ children }: PropsWithChildren) {
   const [queryClient]: any = useState(() => new QueryClient());
   const [trpcClient]: any = useState(() =>
-    trpcClient.CreateClient({
+    trpc.createClient({
       links: [
         httpBatchLink({
           url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc`,
@@ -31,3 +31,4 @@ export default function Providers({children}: PropsWithChildren) {
     </trpc.Provider>
   );
 }
+
