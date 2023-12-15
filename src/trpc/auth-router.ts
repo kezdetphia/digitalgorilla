@@ -12,7 +12,7 @@ export const authRouter = router({
 
       //check if user already exists
       const { docs: users } = await payload.find({
-        collection: "user",
+        collection: "users",
         where: {
           email: {
             equals: email,
@@ -23,7 +23,13 @@ export const authRouter = router({
 
       await payload.create({
         collection: "users",
-        data: {},
+        data: {
+          email,
+          password,
+          role: 'user'
+        },
       });
+
+      return {succes: true, sentToEmail: email}
     }),
 });
