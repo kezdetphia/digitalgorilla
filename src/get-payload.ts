@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
 let cached = (global as any).payload;
 
 if (!cached) {
