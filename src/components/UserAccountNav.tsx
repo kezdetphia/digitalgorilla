@@ -8,8 +8,11 @@ import {
 import { DropdownMenu, DropdownMenuContent } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { User } from "@/payload-types";
+import { useAuth } from "./hooks/use-auth";
 
 export default function UserAccountNav({ user }: { user: User }) {
+  const { signOut } = useAuth();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overlow-visible">
@@ -27,7 +30,7 @@ export default function UserAccountNav({ user }: { user: User }) {
         <DropdownMenuItem asChild>
           <Link href="/sell">Seller Dashboard</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={signOut} className="cursor-pointer">Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
