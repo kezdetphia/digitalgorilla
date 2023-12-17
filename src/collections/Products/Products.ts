@@ -27,7 +27,7 @@ export const Products: CollectionConfig = {
     },
     {
       name: "description",
-      type: "text",
+      type: "textarea",
       label: "Product details",
     },
     {
@@ -48,14 +48,14 @@ export const Products: CollectionConfig = {
       })),
       required: true,
     },
-    {
-      name: "product files",
-      label: "Product file(s)",
-      type: "relationship",
-      required: true,
-      relationTo: "product_files",
-      hasMany: false,
-    },
+    // {
+    //   name: "product files",
+    //   label: "Product file(s)",
+    //   type: "relationship",
+    //   required: true,
+    //   relationTo: "product_files",
+    //   hasMany: false,
+    // },
     {
       name: "approvedForSale",
       label: "Product Status",
@@ -119,12 +119,12 @@ export const Products: CollectionConfig = {
       },
       fields: [
         {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-          required:true
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          required: true,
         },
-      ]
+      ],
     },
   ],
 };
