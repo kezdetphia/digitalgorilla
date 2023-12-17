@@ -1,3 +1,4 @@
+import { getPayloadClient } from './../get-payload';
 import { AuthCredentialsValidator } from "../lib/validators/account-credentials-validator";
 import { publicProcedure, router } from "./trpc";
 import { getPayloadClient } from "../get-payload";
@@ -53,4 +54,22 @@ export const authRouter = router({
 
       return { success: true };
     }),
+
+    signIn: publicProcedure.input(AuthCredentialsValidator).mutation(async({input})=>{
+      const {email, password} = input;
+
+      const payload = await.getPayloadClient()
+      
+      try{
+        await payload.login({
+          collection: 'users',
+          data:{
+            email,
+            password
+          }
+        })
+      }catch(err){
+
+      }
+    })
 });
