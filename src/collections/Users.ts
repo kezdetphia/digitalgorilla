@@ -11,7 +11,7 @@ export const Users: CollectionConfig = {
   },
   access: {
     read: () => true, // Anyone can view the collection
-    create: ()=>true // Only authenticated users can add to the collection
+    create: ()=>true, // Only authenticated users can add to the collection
   },
   fields: [
     {

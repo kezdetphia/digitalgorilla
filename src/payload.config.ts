@@ -4,12 +4,11 @@ import { slateEditor } from "@payloadcms/richtext-slate";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import path from "path";
 import { Users } from "./collections/Users";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config({
-  path: path.resolve(__dirname, '../.env')
-})
-
+  path: path.resolve(__dirname, "../.env"),
+});
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
@@ -18,22 +17,22 @@ export default buildConfig({
     admin: "/sell",
   },
   admin: {
-    user: 'users',
+    user: "users",
     bundler: webpackBundler(),
-    meta :{
-      titleSuffix: '-DigitalGorilla',
-      favicon: '/favicon.ico',
-      ogImage: 'thumbnail.jpg'
-    }
+    meta: {
+      titleSuffix: "-DigitalGorilla",
+      favicon: "/favicon.ico",
+      ogImage: "thumbnail.jpg",
+    },
   },
-  rateLimit:{
+  rateLimit: {
     max: 2000,
   },
   editor: slateEditor({}),
   db: mongooseAdapter({
     url: process.env.MONGODB_URL!,
   }),
-  typescript:{
-    outputFile: path.resolve(__dirname, 'payload-types.ts')
-  }
+  typescript: {
+    outputFile: path.resolve(__dirname, "payload-types.ts"),
+  },
 });

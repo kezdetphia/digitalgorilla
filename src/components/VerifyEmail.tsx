@@ -11,6 +11,7 @@ interface VerifyEmailProps {
 }
 
 const VerifyEmail = ({ token }: VerifyEmailProps) => {
+  //making request to the backend with the token we passed down from verify-email pagetsx
   const { data, isLoading, isError } = trpc.auth.verifyEmail.useQuery({
     token,
   });

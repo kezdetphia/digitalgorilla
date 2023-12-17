@@ -22,6 +22,7 @@ export const authRouter = router({
       });
       if (users.length !== 0) throw new TRPCError({ code: "CONFLICT" });
 
+      //creating user
       await payload.create({
         collection: "users",
         data: {
@@ -31,7 +32,7 @@ export const authRouter = router({
         },
       });
 
-      return { succes: true, sentToEmail: email };
+      return { success: true, sentToEmail: email };
     }),
 
   verifyEmail: publicProcedure
@@ -41,6 +42,7 @@ export const authRouter = router({
 
       const payload = await getPayloadClient();
 
+      //verifying the user 
       const isVerified = await payload.verifyEmail({
         collection: "users",
         token,
