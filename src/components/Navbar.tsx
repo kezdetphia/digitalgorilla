@@ -4,11 +4,16 @@ import { Icons } from "./Icons";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import Cart from "./Cart";
-import gorillaicon from '../../public/gorillaIcon.jpg'
+import gorillaicon from "../../public/gorillaIcon.jpg";
 import Image from "next/image";
+import { getServerSideUser } from "@/lib/payload-utils";
+import {cookies} from 'next/headers' 
+import UserAccountNav from "./UserAccountNav";
 
-export default function Navbar() {
-  const user = null;
+
+const Navbar= async()=> {
+  const nextCookies = cookies()
+  const { user } = await getServerSideUser(nextCookies);
 
   return (
     <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
@@ -44,7 +49,7 @@ export default function Navbar() {
                     ></span>
                   )}
                   {user ? (
-                    <p></p>
+                    <UserAccountNav user={user} />
                   ) : (
                     <Link
                       href="/sign-up"
@@ -80,3 +85,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+export default Navbar;
