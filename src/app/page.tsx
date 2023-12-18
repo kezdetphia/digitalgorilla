@@ -49,8 +49,11 @@ export default function Home() {
         </div>
         {/* TODO : List products */}
 
-        <ProductReel title="brand new" href="/prodcuts" />
-
+        <ProductReel
+          query={{ sort: "desc", limit: 4 }}
+          title="brand new"
+          href="/prodcuts"
+        />
       </MaxWidthWrapper>
       <section className="border-t border-gray-200 bg-gray-50">
         <MaxWidthWrapper className="py-20">
