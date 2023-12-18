@@ -44,7 +44,7 @@ export default function ProductListing({
         })}
         href={`/products/${product.id}`}
       >
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col  w-full">
           
           <ImageSlider urls={validUrls} />
           <h3 className="mt-4 font-medium text-sm text-gray-700">
