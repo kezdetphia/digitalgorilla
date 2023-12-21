@@ -1,4 +1,4 @@
-import { PRODUCT_CATERGORIES } from "../../config";
+import { PRODUCT_CATEGORIES } from "../../config";
 import { CollectionConfig } from "payload/types";
 
 export const Products: CollectionConfig = {
@@ -42,7 +42,7 @@ export const Products: CollectionConfig = {
       name: "category",
       label: "Category",
       type: "select",
-      options: PRODUCT_CATERGORIES.map(({ label, value }) => ({
+      options: PRODUCT_CATEGORIES.map(({ label, value }) => ({
         label,
         value,
       })),
