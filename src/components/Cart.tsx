@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { PRODUCT_CATEGORIES } from "@/config";
-import { useCart } from '../components/hooks/use-cart'
+import { useCart } from "../components/hooks/use-cart";
 import { cn, formatPrice } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { Check, Loader2, X } from "lucide-react";
