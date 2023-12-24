@@ -10,7 +10,6 @@ export const appRouter = router({
   auth: authRouter,
   payment: paymentRouter,
 
-
   getInfiniteProducts: publicProcedure
     .input(
       z.object({

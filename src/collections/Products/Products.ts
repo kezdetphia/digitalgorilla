@@ -1,13 +1,77 @@
+import { ProductFile, User } from "./../../payload-types";
+import { BeforeChangeHook } from "payload/dist/globals/config/types";
 import { PRODUCT_CATEGORIES } from "../../config";
 import { CollectionConfig } from "payload/types";
+import { Product } from "../../payload-types";
+import { stripe } from "../../lib/stripe";
+
+const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
+  const user = req.User;
+  return { ...data, user: user.id };
+};
 
 export const Products: CollectionConfig = {
   slug: "products",
   admin: {
     useAsTitle: "name",
   },
-  //this determines who has access to what
-  access: {},
+  access: {}, // Define access rules as needed
+
+  hooks: {
+    beforeChange: [
+      addUser,
+      async (args) => {
+        if (args.operation === "create") {
+          const data = args.data as Product;
+
+          try {
+            const createdProduct = await stripe.products.create({
+              name: data.name,
+              default_price: {
+                currency: "USD",
+                unit_amount: Math.round(data.price * 100),
+              },
+            });
+
+            const updated: Product = {
+              ...data,
+              stripeID: createdProduct.id,
+              priceId: createdProduct.default_price as string,
+            };
+
+            return updated;
+          } catch (error) {
+            console.error("Error creating product:", error);
+            throw new Error("Product creation failed");
+          }
+        } else if (args.operation === "update") {
+          const data = args.data as Product;
+
+          try {
+            const updatedProduct = await stripe.products.update(
+              data.stripeID!,
+              {
+                name: data.name,
+                default_price: data.priceId!,
+              }
+            );
+
+            const updated: Product = {
+              ...data,
+              stripeID: updatedProduct.id,
+              priceId: updatedProduct.default_price as string,
+            };
+
+            return updated;
+          } catch (error) {
+            console.error("Error updating product:", error);
+            throw new Error("Product update failed");
+          }
+        }
+      },
+    ],
+  },
+
   fields: [
     {
       name: "user",
