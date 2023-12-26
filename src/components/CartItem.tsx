@@ -1,5 +1,5 @@
 import { PRODUCT_CATEGORIES } from "@/config";
-import { Product } from "@/payload-types";
+import { Product } from "../payload-types";
 import { ImageIcon, X } from "lucide-react";
 import Image from "next/image";
 import { useCart } from "./hooks/use-cart";

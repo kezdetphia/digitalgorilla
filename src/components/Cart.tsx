@@ -1,31 +1,30 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { PRODUCT_CATEGORIES } from "@/config";
-import { useCart } from "../components/hooks/use-cart";
-import { cn, formatPrice } from "@/lib/utils";
-import { trpc } from "@/trpc/client";
-import { Check, Loader2, X } from "lucide-react";
-import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
+import { Separator } from "./ui/separator";
+import { formatPrice } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { buttonVariants } from "./ui/button";
+import Image from "next/image";
+import { useCart } from "../components/hooks/use-cart";
+import { ScrollArea } from "./ui/scroll-area";
+import CartItem from "./CartItem";
 import { useEffect, useState } from "react";
 
-const Page = () => {
-  const { items, removeItem } = useCart();
-
-  const router = useRouter();
-
-  const { mutate: createCheckoutSession, isLoading } =
-    trpc.payment.createSession.useMutation({
-      onSuccess: ({ url }) => {
-        if (url) router.push(url);
-      },
-    });
-
-  const productIds = items.map(({ product }) => product.id);
+const Cart = () => {
+  const { items } = useCart();
+  const itemCount = items.length;
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -38,180 +37,90 @@ const Page = () => {
   const fee = 1;
 
   return (
-    <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Shopping Cart
-        </h1>
-
-        <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <div
-            className={cn("lg:col-span-7", {
-              "rounded-lg border-2 border-dashed border-zinc-200 p-12":
-                isMounted && items.length === 0,
-            })}
-          >
-            <h2 className="sr-only">Items in your shopping cart</h2>
-
-            {isMounted && items.length === 0 ? (
-              <div className="flex h-full flex-col items-center justify-center space-y-1">
-                <div
-                  aria-hidden="true"
-                  className="relative mb-4 h-40 w-40 text-muted-foreground"
-                >
-                  <Image
-                    src="/hippo-empty-cart.png"
-                    fill
-                    loading="eager"
-                    alt="empty shopping cart hippo"
-                  />
+    <Sheet>
+      <SheetTrigger className="group -m-2 flex items-center p-2">
+        <ShoppingCart
+          aria-hidden="true"
+          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+        />
+        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+          {isMounted ? itemCount : 0}
+        </span>
+      </SheetTrigger>
+      <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
+        <SheetHeader className="space-y-2.5 pr-6">
+          <SheetTitle>Cart ({itemCount})</SheetTitle>
+        </SheetHeader>
+        {itemCount > 0 ? (
+          <>
+            <div className="flex w-full flex-col pr-6">
+              <ScrollArea>
+                {items.map(({ product }) => (
+                  <CartItem product={product} key={product.id} />
+                ))}
+              </ScrollArea>
+            </div>
+            <div className="space-y-4 pr-6">
+              <Separator />
+              <div className="space-y-1.5 text-sm">
+                <div className="flex">
+                  <span className="flex-1">Shipping</span>
+                  <span>Free</span>
                 </div>
-                <h3 className="font-semibold text-2xl">Your cart is empty</h3>
-                <p className="text-muted-foreground text-center">
-                  Whoops! Nothing to show here yet.
-                </p>
+                <div className="flex">
+                  <span className="flex-1">Transaction Fee</span>
+                  <span>{formatPrice(fee)}</span>
+                </div>
+                <div className="flex">
+                  <span className="flex-1">Total</span>
+                  <span>{formatPrice(cartTotal + fee)}</span>
+                </div>
               </div>
-            ) : null}
 
-            <ul
-              className={cn({
-                "divide-y divide-gray-200 border-b border-t border-gray-200":
-                  isMounted && items.length > 0,
-              })}
+              <SheetFooter>
+                <SheetTrigger asChild>
+                  <Link
+                    href="/cart"
+                    className={buttonVariants({
+                      className: "w-full",
+                    })}
+                  >
+                    Continue to Checkout
+                  </Link>
+                </SheetTrigger>
+              </SheetFooter>
+            </div>
+          </>
+        ) : (
+          <div className="flex h-full flex-col items-center justify-center space-y-1">
+            <div
+              aria-hidden="true"
+              className="relative mb-4 h-60 w-60 text-muted-foreground"
             >
-              {isMounted &&
-                items.map(({ product }) => {
-                  const label = PRODUCT_CATEGORIES.find(
-                    (c) => c.value === product.category
-                  )?.label;
-
-                  const { image } = product.images[0];
-
-                  return (
-                    <li key={product.id} className="flex py-6 sm:py-10">
-                      <div className="flex-shrink-0">
-                        <div className="relative h-24 w-24">
-                          {typeof image !== "string" && image.url ? (
-                            <Image
-                              fill
-                              src={image.url}
-                              alt="product image"
-                              className="h-full w-full rounded-md object-cover object-center sm:h-48 sm:w-48"
-                            />
-                          ) : null}
-                        </div>
-                      </div>
-
-                      <div className="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
-                        <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
-                          <div>
-                            <div className="flex justify-between">
-                              <h3 className="text-sm">
-                                <Link
-                                  href={`/product/${product.id}`}
-                                  className="font-medium text-gray-700 hover:text-gray-800"
-                                >
-                                  {product.name}
-                                </Link>
-                              </h3>
-                            </div>
-
-                            <div className="mt-1 flex text-sm">
-                              <p className="text-muted-foreground">
-                                Category: {label}
-                              </p>
-                            </div>
-
-                            <p className="mt-1 text-sm font-medium text-gray-900">
-                              {formatPrice(product.price)}
-                            </p>
-                          </div>
-
-                          <div className="mt-4 sm:mt-0 sm:pr-9 w-20">
-                            <div className="absolute right-0 top-0">
-                              <Button
-                                aria-label="remove product"
-                                onClick={() => removeItem(product.id)}
-                                variant="ghost"
-                              >
-                                <X className="h-5 w-5" aria-hidden="true" />
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-
-                        <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                          <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
-
-                          <span>Eligible for instant delivery</span>
-                        </p>
-                      </div>
-                    </li>
-                  );
+              <Image
+                src="/hippo-empty-cart.png"
+                fill
+                alt="empty shopping cart hippo"
+              />
+            </div>
+            <div className="text-xl font-semibold">Your cart is empty</div>
+            <SheetTrigger asChild>
+              <Link
+                href="/products"
+                className={buttonVariants({
+                  variant: "link",
+                  size: "sm",
+                  className: "text-sm text-muted-foreground",
                 })}
-            </ul>
-          </div>
-
-          <section className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
-            <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
-
-            <div className="mt-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-600">Subtotal</p>
-                <p className="text-sm font-medium text-gray-900">
-                  {isMounted ? (
-                    formatPrice(cartTotal)
-                  ) : (
-                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                  )}
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <div className="flex items-center text-sm text-muted-foreground">
-                  <span>Flat Transaction Fee</span>
-                </div>
-                <div className="text-sm font-medium text-gray-900">
-                  {isMounted ? (
-                    formatPrice(fee)
-                  ) : (
-                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                  )}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <div className="text-base font-medium text-gray-900">
-                  Order Total
-                </div>
-                <div className="text-base font-medium text-gray-900">
-                  {isMounted ? (
-                    formatPrice(cartTotal + fee)
-                  ) : (
-                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <Button
-                disabled={items.length === 0 || isLoading}
-                onClick={() => createCheckoutSession({ productIds })}
-                className="w-full"
-                size="lg"
               >
-                {isLoading ? (
-                  <Loader2 className="w-4 h-4 animate-spin mr-1.5" />
-                ) : null}
-                Checkout
-              </Button>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
+                Add items to your cart to checkout
+              </Link>
+            </SheetTrigger>
+          </div>
+        )}
+      </SheetContent>
+    </Sheet>
   );
 };
 
-export default Page;
+export default Cart;

@@ -20,7 +20,9 @@ export interface Config {
 }
 export interface User {
   id: string;
-  role: 'admin' | 'user';
+  products?: (string | Product)[] | null;
+  product_files?: (string | ProductFile)[] | null;
+  role: "admin" | "user";
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -44,7 +46,7 @@ export interface Product {
   product_files: string | ProductFile;
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
   priceId?: string | null;
-  stripeID?: string | null;
+  stripeId?: string | null;
   images: {
     image: string | Media;
     id?: string | null;

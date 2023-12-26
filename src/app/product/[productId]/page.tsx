@@ -1,3 +1,4 @@
+'use client'
 import ImageSlider from "../../../components/ImageSider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductReel from "@/components/ProductReel";
