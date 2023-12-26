@@ -45,7 +45,7 @@ const Navbar= async()=> {
                   {user ? null : (
                     <span
                       className="h-6 w-px bg-gray-200"
-                      aria-aria-hidden="true"
+                      aria-hidden="true"
                     ></span>
                   )}
                   {user ? (
@@ -61,14 +61,14 @@ const Navbar= async()=> {
                   {user ? (
                     <span
                       className="h-6 w-px bg-gray-200"
-                      aria-aria-hidden="true"
+                      aria-hidden="true"
                     ></span>
                   ) : null}
                   {user ? null : (
                     <div className="flex lg:ml-6">
                       <span
                         className="h-6 w-px bg-gray-200"
-                        aria-aria-hidden="true"
+                        aria-hidden="true"
                       ></span>
                     </div>
                   )}
