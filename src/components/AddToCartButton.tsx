@@ -1,10 +1,11 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { useCart } from "./hooks/use-cart";
-import { Product } from "@/payload-types";
+import { useCart } from "../components/hooks/use-cart";
+import { Product } from "../payload-types";
 
-export default function AddToCartButton({product}: {product: Product}) {
+const AddToCartButton = ({ product }: { product: Product }) => {
   const { addItem } = useCart();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
@@ -14,7 +15,7 @@ export default function AddToCartButton({product}: {product: Product}) {
     }, 2000);
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [isSuccess]);
 
   return (
     <Button
@@ -25,7 +26,9 @@ export default function AddToCartButton({product}: {product: Product}) {
       size="lg"
       className="w-full"
     >
-      {isSuccess ? "Added" : "Add to Cart"}
+      {isSuccess ? "Added!" : "Add to cart"}
     </Button>
   );
-}
+};
+
+export default AddToCartButton;

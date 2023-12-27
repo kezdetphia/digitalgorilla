@@ -4,12 +4,11 @@ import {
 } from "payload/dist/collections/config/types";
 import { PRODUCT_CATEGORIES } from "../../config";
 import { Access, CollectionConfig } from "payload/types";
-import { Product, User } from '../../payload-types';
+import { Product, User } from "../../payload-types";
 import { stripe } from "../../lib/stripe";
 
 const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
   const user = req.user;
-
   return { ...data, user: user.id };
 };
 
@@ -21,6 +20,7 @@ const syncUser: AfterChangeHook<Product> = async ({ req, doc }) => {
 
   if (fullUser && typeof fullUser === "object") {
     const { products } = fullUser;
+
     const allIDs = [
       ...(products?.map((product) =>
         typeof product === "object" ? product.id : product
@@ -88,7 +88,7 @@ export const Products: CollectionConfig = {
       addUser,
       async (args) => {
         if (args.operation === "create") {
-          const data = args.data as Product;
+        const data = args.data as Product;
 
           const createdProduct = await stripe.products.create({
             name: data.name,
