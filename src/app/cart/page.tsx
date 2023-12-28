@@ -21,7 +21,7 @@ const Page = () => {
       onSuccess: ({ url }) => {
         if (url) router.push(url);
       },
-    });
+    }); 
 
   const productIds = items.map(({ product }) => product.id);
 
@@ -80,7 +80,7 @@ const Page = () => {
               })}
             >
               {isMounted &&
-                items.map(({ product }) => {
+                items.map(({ product }) => { 
                   const label = PRODUCT_CATEGORIES.find(
                     (c) => c.value === product.category
                   )?.label;
