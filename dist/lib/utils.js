@@ -50,9 +50,7 @@ function constructMetadata(_a) {
             description: description,
             images: [image],
             creator: "@joshtriedcoding",
-        }, icons: icons, 
-        // metadataBase: new URL("https://digitalgorilla.up.railway.app"),  //url deployed
-        metadataBase: new URL("https://659485a76a766b1c855706e8--strong-cat-3aa3a2.netlify.app/") }, (noIndex && {
+        }, icons: icons, metadataBase: new URL("https://digitalgorilla.up.railway.app") }, (noIndex && {
         robots: {
             index: false,
             follow: false,

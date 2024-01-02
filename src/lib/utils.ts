@@ -26,6 +26,7 @@ export function formatPrice(
   }).format(numericPrice);
 }
 
+
 export function constructMetadata({
   title = "DigitalGorilla - the marketplace for digital assets",
   description = "DigitalGorilla is an open-source marketplace for high-quality digital goods.",
@@ -59,10 +60,7 @@ export function constructMetadata({
       creator: "@joshtriedcoding",
     },
     icons,
-    // metadataBase: new URL("https://digitalgorilla.up.railway.app"),  //url deployed
-    metadataBase: new URL(
-      "https://659485a76a766b1c855706e8--strong-cat-3aa3a2.netlify.app/"
-    ), //url deployed
+    metadataBase: new URL("https://digitalgorilla.up.railway.app"),  //url deployed
     ...(noIndex && {
       robots: {
         index: false,
