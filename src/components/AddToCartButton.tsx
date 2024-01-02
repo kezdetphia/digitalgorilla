@@ -9,10 +9,10 @@ const AddToCartButton = ({ product }: { product: Product }) => {
   const { addItem } = useCart();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setIsSuccess(false);
-  //   }, 2000);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsSuccess(false);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [isSuccess]);
