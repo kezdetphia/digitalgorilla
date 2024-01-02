@@ -4,7 +4,6 @@
   "private": true,
   "main": "dist/server.js",
   "scripts": {
-
     "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
     "build:server": "tsc --project tsconfig.server.json",
     "build:next": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NEXT_BUILD=true node dist/server.js",
@@ -27,6 +26,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-email/components": "^0.0.12",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@tanstack/react-query": "^4.36.1",
     "@trpc/client": "^10.44.1",
     "@trpc/next": "^10.44.1",
