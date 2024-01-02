@@ -1,4 +1,4 @@
-import { PriaryActionEmailHtml } from "@/components/emails/PrimaryActionEmails";
+import {PriaryActionEmailHtml} from '../components/emails/PrimaryActionEmails'
 import { CollectionConfig, Access } from "payload/types";
 
 const adminsAnduser: Access = ({ req: { user } }) => {
@@ -35,7 +35,7 @@ export const Users: CollectionConfig = {
   },
 
   fields: [
-    {
+    { 
       name: "products",
       label: "Products",
       admin: {
