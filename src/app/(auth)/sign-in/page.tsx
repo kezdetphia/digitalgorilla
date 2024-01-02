@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Icons } from "@/components/Icons";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +17,7 @@ import {
 } from "@/lib/validators/account-credentials-validator";
 import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
-import { ZodError } from "zod";
+// import { ZodError } from "zod";   //Debug
 import { useRouter, useSearchParams } from "next/navigation";
 
 const Page = () => {
@@ -133,7 +134,7 @@ const Page = () => {
             </form>
             <div className="relative">
               <div
-                aria-hidder="true"
+                aria-hidden="true"
                 className="absolute inset-0 flex items-center"
               >
                 <span className="w-full border-t" />
