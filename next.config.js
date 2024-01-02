@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-domains: [
-  'localhost',
-  'digitalgorilla.up.railway.app' //url deploy
-  
-]
+    domains: [
+      "localhost",
+      "digitalgorilla.up.railway.app", // URL for deployment
+    ],
   },
 };
 
