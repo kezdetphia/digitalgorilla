@@ -14,8 +14,8 @@ const AddToCartButton = ({ product }: { product: Product }) => {
       setIsSuccess(false);
     }, 2000);
 
-  //   return () => clearTimeout(timeout);
-  // }, [isSuccess]);
+    return () => clearTimeout(timeout);
+  }, [isSuccess]);
 
   return (
     <Button
