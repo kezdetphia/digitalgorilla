@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn, constructMetadata } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
-import Providers from "@/components/Providers";
+import Providers from '../components/Providers'
 import { Toaster } from "sonner";
 import Footer from "@/components/Footer";
 
