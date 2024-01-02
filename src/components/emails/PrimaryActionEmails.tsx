@@ -1,17 +1,26 @@
-import { Body, Button, Container, Head, Hr, Html, Img, Preview, Section, Text } from "@react-email/components";
+import {
+  Body,
+  Button,
+  Container,
+  Head,
+  Hr,
+  Html,
+  Img,
+  Preview,
+  Section,
+  Text,
+  render,
+} from "@react-email/components";
 import React from "react";
 
-interface EmailtemplateProps {
+interface EmailTemplateProps {
   actionLabel: string;
   buttonText: string;
   href: string;
 }
 
-export default function EmailTemplate({
-  actionLabel,
-  buttonText,
-  href,
-}: EmailtemplateProps) {
+export default function EmailTemplate({ actionLabel, buttonText, href }: EmailTemplateProps) {
+  return(
   <Html>
     <Head />
     <Preview>The marketplace for high-quality digital goods.</Preview>
@@ -45,8 +54,12 @@ export default function EmailTemplate({
         </Text>
       </Container>
     </Body>
-  </Html>;
+  </Html>
+  )
 }
+
+export const PriaryActionEmailHtml = ( props: EmailTemplateProps ) => 
+render(<EmailTemplate {...props}/>, {pretty:true})
 
 
 const main = {
