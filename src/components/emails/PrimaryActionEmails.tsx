@@ -27,15 +27,15 @@ export default function EmailTemplate({ actionLabel, buttonText, href }: EmailTe
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`${process.env.NEXT_PUBLIC_SERVER_URL}/hippo-newsletter-sign-up.png`}
+          src={`${process.env.NEXT_PUBLIC_SERVER_URL}/gorilla-newsletter-sign-up.png`}
           width="150"
           height="150"
-          alt="DigitalHippo"
+          alt="DigitalGorilla"
           style={logo}
         />
         <Text style={paragraph}>Hi there,</Text>
         <Text style={paragraph}>
-          Welcome to DigitalHippo, the marketplace for high quality digital
+          Welcome to DigitalGorilla, the marketplace for high quality digital
           goods. Use the button below to {actionLabel}.
         </Text>
         <Section style={btnContainer}>
@@ -46,7 +46,7 @@ export default function EmailTemplate({ actionLabel, buttonText, href }: EmailTe
         <Text style={paragraph}>
           Best,
           <br />
-          The DigitalHippo team
+          The DigitalGorilla team
         </Text>
         <Hr style={hr} />
         <Text style={footer}>

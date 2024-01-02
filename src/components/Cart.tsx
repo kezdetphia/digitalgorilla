@@ -100,7 +100,7 @@ const Cart = () => {
               <Image
                 src="/gorilla-empty-cart.png"
                 fill
-                alt="empty shopping cart hippo"
+                alt="empty shopping cart gorilla"
               />
             </div>
             <div className="text-xl font-semibold">Your cart is empty</div>

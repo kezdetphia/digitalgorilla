@@ -21,7 +21,7 @@ const VerifyEmailPage = ({ searchParams }: PageProps) => {
             {/* //TODO: check missing */}
             <div className="relative mb-4 h-60 w-60 text-muted-foreground">
               <Image
-                src="/hippo-email-sent.png"
+                src="/gorilla-email-sent.png"
                 fill
                 alt="gorilla email sent image"
               />
