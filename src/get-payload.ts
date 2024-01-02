@@ -46,8 +46,8 @@ if (cached.client) {
   if (!cached.promise) {
     cached.promise = payload.init({
       email: {
-        transport: transporter,     
-        fromAddress: "onboarding@resend.dev",
+        transport: transporter,
+        fromAddress: "onboarding@resend.dev", //email resend
         fromName: "DigitalGorilla",
       },
       secret: process.env.PAYLOAD_SECRET,
@@ -55,7 +55,7 @@ if (cached.client) {
       ...(initOptions || {}),
     });
   }
-
+ 
   try {
     cached.client = await cached.promise;
   } catch (e: unknown) {
