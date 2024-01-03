@@ -8,6 +8,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
+    "plugin:next/recommended", // Added Next.js plugin
   ],
   overrides: [
     {
@@ -25,11 +26,16 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "react"],
+  plugins: ["@typescript-eslint", "react", "next", "eslint-plugin-next"],
+  settings: {
+    react: {
+      version: "detect", // Added React version detection
+    },
+  },
   rules: {
     "@typescript-eslint/no-unused-vars": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "react/prop-types": 'off'
+    "react/prop-types": "off",
   },
 };
