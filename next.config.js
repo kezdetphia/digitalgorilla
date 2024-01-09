@@ -1,19 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (
-    config,
-    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
-  ) => {
-    // Important: return the modified config
-    return config;
-  },
   images: {
-    domains: [
-      "localhost",
-      "digitalgorilla.up.railway.app", // URL for deployment
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "digitalhippo-production.up.railway.app",
+      },
     ],
   },
 };
-
 
 module.exports = nextConfig;
