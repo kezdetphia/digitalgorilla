@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (
+    config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+  ) => {
+    // Important: return the modified config
+    return config;
+  },
   images: {
     domains: [
       "localhost",
@@ -7,5 +14,6 @@ const nextConfig = {
     ],
   },
 };
+
 
 module.exports = nextConfig;
