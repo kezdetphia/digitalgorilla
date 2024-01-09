@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Providers from "@/components/Providers";
+import Providers from '../components/Providers'
 import { cn, constructMetadata } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";

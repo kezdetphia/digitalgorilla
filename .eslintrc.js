@@ -26,7 +26,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "react", "next", "eslint-plugin-next"],
+  plugins: ["@typescript-eslint", "eslint-plugin-next"], // Include eslint-plugin-next here
   settings: {
     react: {
       version: "detect", // Added React version detection
